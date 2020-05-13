@@ -1,0 +1,703 @@
+/* STYLES SHEET */
+
+/* BODY */
+body {
+    background-color: #E4E4E4; 
+}
+
+
+/* HEADINGS */
+
+h3{
+    font-family: 'Kalam', cursive;
+    text-align: center;
+    padding-top: 50px;
+    color: #777777;
+}
+
+
+h4{
+  font-family: 'Kalam', cursive;
+  text-align: left;
+}
+
+
+.toDoTitle{
+  font-family:'Quicksand', sans-serif;
+  font-size: 18px;
+}
+
+/* -------------------- */
+
+/*----- NAVIGATION----- */
+/* This code relates to the side navigatin bar */
+/* first some styles are added to the overall html */
+.bodyNav, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  /* background-color: #E4E4E4; */
+  font-family:'Quicksand', sans-serif;
+
+}
+
+
+/* LINK STYLES */
+/* unvisited link */
+a:link {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* visited link */
+a:visited {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* mouse over link */
+a:hover {
+  /* make it clear its a link */
+  /* text-decoration: underline; */
+  text-underline-position: below;
+}
+
+/* selected link */
+a:active {
+  text-decoration: none;
+  color:#636466;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+}
+
+aside {
+  background-color: #97A0A5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 20%;
+  z-index: 1;
+}
+
+section {
+  /* position relative prevents a side scroll */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* background-color: #fff; */
+  overflow-x: hidden;
+}
+
+#menuLabels {
+  display: inline-block;
+  padding: 7px 10px;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 10px;
+  z-index: 3;
+  position: fixed;
+}
+
+/* burgerMenu */
+.bar {
+  display: block;
+  background-color: #97A0A5;
+  width: 30px;
+  height: 3px;
+  border-radius: 5px;
+  margin: 5px auto;
+  transition: background-color .5s ease-in, transform .5s ease-in, width .5s ease-in;
+}
+
+
+.content {
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  background-color: #E4E4E4;
+  z-index: 2;
+  transition: transform .5s ease-in-out;
+}
+
+
+.asideList {
+  /* Styles for the list */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.asideAnchor {
+  /* Styles for the links */
+  padding: 15px 0;
+  display: block;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 18px;
+  position: relative;
+  transition: color .3s .15s ease-in;
+  font-family:'Quicksand', sans-serif;
+}
+
+.asideAnchor::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: #ffffff;
+  width: 0;
+  transition: width .3s ease-in;
+  z-index: -1;
+}
+
+.asideAnchor:hover {
+  color: #97a0a9;
+}
+
+.asideAnchor:hover::after {
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]:checked ~ .content {
+  transform: translateX(20%);
+}
+
+input[type="checkbox"]:checked ~ label .bar {
+  /* burger menu colour after it transforms into a cross */
+  background-color: #fff;
+}
+
+/* this section transforms the burger menu into a cross when the 
+menu is opened */
+/* this is tge top bar */
+/* each line ensures the code works across all browsers */
+input[type="checkbox"]:checked ~ label .top {
+  -webkit-transform: translateY(0px) rotateZ(45deg);
+  -moz-transform: translateY(0px) rotateZ(45deg);
+  -ms-transform: translateY(0px) rotateZ(45deg);
+  -o-transform: translateY(0px) rotateZ(45deg);
+  transform: translateY(0px) rotateZ(45deg);
+}
+/* this is the bottom bar */
+input[type="checkbox"]:checked ~ label .bottom {
+  -webkit-transform: translateY(-15px) rotateZ(-45deg);
+  -moz-transform: translateY(-15px) rotateZ(-45deg);
+  -ms-transform: translateY(-15px) rotateZ(-45deg);
+  -o-transform: translateY(-15px) rotateZ(-45deg);
+  transform: translateY(-15px) rotateZ(-45deg);
+}
+
+input[type="checkbox"]:checked ~ label .middle {
+  width: 0;
+}
+
+.middle {
+  margin: 0 auto;
+}
+
+.ua {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  color: #777777;
+  font-size: 2em;
+  z-index: 2;
+}
+
+
+
+
+
+/* ---LOGIN/SIGNUP FORM------- */
+
+#formContainer{
+    /* centralising button */
+    text-align: center;
+    padding-top: 50px;
+    margin-top: 50px;
+}
+
+.loginLink{
+    text-decoration: underline;
+    font-family: 'Kalam', cursive;
+    color: #707070 ;
+    font-size: 18px;
+}
+
+
+
+#passwordInput{
+    /* rounding corners and font */
+    border-radius: 40px;
+    font-family:'Quicksand', sans-serif;
+}
+
+#confirmPasswordInput{
+  /* rounding corners and font */
+  border-radius: 40px;
+  font-family:'Quicksand', sans-serif;
+}
+
+#emailInput{
+    /* rounding corners and font */
+    border-radius: 40px;
+    font-family:'Quicksand', sans-serif;
+}
+
+/* BUTTONS */
+
+#loginButton{
+    background-color: #B9C0DA;
+    border-radius: 50px;
+    font-family: 'Kalam', cursive;
+    font-size: 15px;
+    box-shadow: 1px 10px 15px 0 #afafaf; 
+
+}
+
+#loginButton:hover {
+    /* shadow for pushed effect */
+    box-shadow: 0 0 0 0;
+    border: none;
+  }
+
+
+
+
+
+  /* ----OVERVIEW PAGE--- */
+
+
+  #toDoCard{
+    /* Todo list card for curret tasks */
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-left: 60px;
+    padding-top: 20px;
+    /* padding-bottom: 300px; */
+    height: 700px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+  }
+
+  #monthCard{
+    /* monthly view*/
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-right: 60px;
+    /* padding-top: 20px; */
+    height: 700px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    /* position: absolute; */
+}
+
+
+/* CALENDER */
+
+/* Organises the numbers in an appropriate arrangement */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; box-sizing: border-box;
+  }
+  
+  .bodyCalender {
+   font-family:'Quicksand', sans-serif;
+   background: #E4E4E4;
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+  }
+  
+  #calendar {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    width: 100%;
+    margin: 0 auto;
+    height: 577px;
+    /* rounded edges */
+    border-radius: 10px;
+    /* overflow hidden stops the next months being visible */
+    overflow: hidden;
+  }
+
+  .header {
+    height: 50px;
+    width: 100%;
+    background: #A9D2D5;
+    color: #ffffff;
+    text-align: center;
+    position:relative;
+    z-index: 100;
+  }
+  
+  .header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    line-height: 50px;
+    font-weight: 100;
+    letter-spacing: 1px;
+  }
+  
+  /* month navigation buttons */
+  .left, .right {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    top: 50%;
+    margin-top: -7.5px;
+    cursor: pointer;
+  }
+  
+  .left {
+    /* triangle shape and colour for left button */
+    border-width: 7.5px 10px 7.5px 0;
+    border-color: transparent #ffffff transparent transparent;
+    left: 20px;
+  }
+  
+  .right {
+    /* triangle shape and colour for right button */
+    border-width: 7.5px 0 7.5px 10px;
+    border-color: transparent transparent transparent #ffffff;
+    right: 20px;
+  }
+  
+  .month {
+    padding-top: 5%;
+    text-align: center;
+    overflow: hidden;
+    opacity: 0;
+  }
+  
+
+  /* Animations fading in and out on load*/
+  .month.new {
+      -webkit-animation: fadeIn 1s ease-out;
+      opacity: 1;
+    }
+  
+  .month.in.next {
+    -webkit-animation: moveFromTopFadeMonth .4s ease-out;
+    -moz-animation: moveFromTopFadeMonth .4s ease-out;
+    animation: moveFromTopFadeMonth .4s ease-out;
+    opacity: 1;
+  }
+  
+  .month.out.next {
+    -webkit-animation: moveToTopFadeMonth .4s ease-in;
+    -moz-animation: moveToTopFadeMonth .4s ease-in;
+    animation: moveToTopFadeMonth .4s ease-in;
+    opacity: 1;
+  }
+  
+  .month.in.prev {
+    -webkit-animation: moveFromBottomFadeMonth .4s ease-out;
+    -moz-animation: moveFromBottomFadeMonth .4s ease-out;
+    animation: moveFromBottomFadeMonth .4s ease-out;
+    opacity: 1;
+  }
+  
+  .month.out.prev {
+    -webkit-animation: moveToBottomFadeMonth .4s ease-in;
+    -moz-animation: moveToBottomFadeMonth .4s ease-in;
+    animation: moveToBottomFadeMonth .4s ease-in;
+    opacity: 1;
+  }
+  
+  .week {
+   background: #ffffff;
+  }
+  
+  .day{
+    display: inline-block;
+  /* width assigned to each day */
+  /* adjust these to condense the calender for smaller screens  */
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+    position: relative;
+    z-index: 100;
+    border-radius: 50px;
+  }
+
+  
+/* Link, Visited, Hover, Active */
+
+  .day:hover {
+    background-color: rgb(169, 210, 213, 0.5);
+  }
+
+  .day:active {
+    background: #a9d2d5;
+  }
+
+
+
+  .day.other {
+   color: rgba(0, 0, 0, 0.3);
+  }
+
+  .day.other:hover {
+    background-color: rgb(169, 210, 213, 0.25);
+  }
+
+  .day.other:active {
+    background-color: rgb(169, 210, 213, 0.5);
+  }
+
+
+  
+  .day.today {
+    color: #A9D2D5;
+  }
+
+  .day.today:hover{
+    color: #ffffff;
+  }
+
+  .day.today:active {
+    background: #a9d2d5;
+    /* color: #ffffff; */
+  }
+  
+
+  .day-name {
+    font-size: 9px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: rgba(0, 0, 0, 0.3);
+    letter-spacing: .7px;
+  }
+  
+  .day-number {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+  }
+
+  
+  /* Animations to transition between months*/
+  @-webkit-keyframes moveFromTopFade {
+    from { opacity: .3; height:0px; margin-top:0px; -webkit-transform: translateY(-100%); }
+  }
+  @-moz-keyframes moveFromTopFade {
+    from { height:0px; margin-top:0px; -moz-transform: translateY(-100%); }
+  }
+  @keyframes moveFromTopFade {
+    from { height:0px; margin-top:0px; transform: translateY(-100%); }
+  }
+  
+  @-webkit-keyframes moveToTopFade {
+    to { opacity: .3; height:0px; margin-top:0px; opacity: 0.3; -webkit-transform: translateY(-100%); }
+  }
+  @-moz-keyframes moveToTopFade {
+    to { height:0px; -moz-transform: translateY(-100%); }
+  }
+  @keyframes moveToTopFade {
+    to { height:0px; transform: translateY(-100%); }
+  }
+  
+  @-webkit-keyframes moveToTopFadeMonth {
+    to { opacity: 0; -webkit-transform: translateY(-30%) scale(.95); }
+  }
+  @-moz-keyframes moveToTopFadeMonth {
+    to { opacity: 0; -moz-transform: translateY(-30%); }
+  }
+  @keyframes moveToTopFadeMonth {
+    to { opacity: 0; -moz-transform: translateY(-30%); }
+  }
+  
+  @-webkit-keyframes moveFromTopFadeMonth {
+    from { opacity: 0; -webkit-transform: translateY(30%) scale(.95); }
+  }
+  @-moz-keyframes moveFromTopFadeMonth {
+    from { opacity: 0; -moz-transform: translateY(30%); }
+  }
+  @keyframes moveFromTopFadeMonth {
+    from { opacity: 0; -moz-transform: translateY(30%); }
+  }
+  
+  @-webkit-keyframes moveToBottomFadeMonth {
+    to { opacity: 0; -webkit-transform: translateY(30%) scale(.95); }
+  }
+  @-moz-keyframes moveToBottomFadeMonth {
+    to { opacity: 0; -webkit-transform: translateY(30%); }
+  }
+  @keyframes moveToBottomFadeMonth {
+    to { opacity: 0; -webkit-transform: translateY(30%); }
+  }
+  
+  @-webkit-keyframes moveFromBottomFadeMonth {
+    from { opacity: 0; -webkit-transform: translateY(-30%) scale(.95); }
+  }
+  @-moz-keyframes moveFromBottomFadeMonth {
+    from { opacity: 0; -webkit-transform: translateY(-30%); }
+  }
+  @keyframes moveFromBottomFadeMonth {
+    from { opacity: 0; -webkit-transform: translateY(-30%); }
+  }
+  
+  @-webkit-keyframes fadeIn  {
+    from { opacity: 0; }
+  }
+  @-moz-keyframes fadeIn  {
+    from { opacity: 0; }
+  }
+  @keyframes fadeIn  {
+    from { opacity: 0; }
+  }
+  
+  @-webkit-keyframes fadeOut  {
+    to { opacity: 0; }
+  }
+  @-moz-keyframes fadeOut  {
+    to { opacity: 0; }
+  }
+  @keyframes fadeOut  {
+    to { opacity: 0; }
+  }
+  
+  @-webkit-keyframes fadeOutShink  {
+    to { opacity: 0; padding: 0px; height: 0px; }
+  }
+  @-moz-keyframes fadeOutShink  {
+    to { opacity: 0; padding: 0px; height: 0px; }
+  }
+  @keyframes fadeOutShink  {
+    to { opacity: 0; padding: 0px; height: 0px; }
+  } 
+
+
+
+
+
+
+
+/* -----NEW TASK PAGE-------- */
+
+#newTaskCard{
+    background-color: white;
+    /* only top two corners are rounded */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    /* card paddings and margins */
+    padding-top: 75px;
+    padding-bottom: 100px;
+    padding-left: 30%;
+    padding-right: 30%;
+    /* shadow around the card for some depth */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}
+
+#taskContainer{
+    /* text-align: left; */
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+#taskName{
+    /* rounding corners and font */
+    border-radius: 40px;
+    font-family:'Quicksand', sans-serif;
+}
+
+
+#moreDetailsArea{
+    /* rounding corners and font */
+    border-radius: 15px;
+    font-family:'Quicksand', sans-serif;
+}
+
+#deadline{
+    /* rounding corners and font */
+    border-radius: 15px;
+    font-family:'Quicksand', sans-serif;
+    
+}
+
+
+#duration{
+    border-radius: 40px;
+    font-family:'Quicksand', sans-serif;
+}
+
+/* form label styles */
+#formLabel{
+    font-family: 'Kalam', cursive;
+    font-size: 15px;
+}
+
+/* task or event label styles */
+#tOrELabel{
+    font-family:'Quicksand', sans-serif;
+    font-size: 15px;
+}
+
+#durationLabel{
+    font-family: 'Kalam', cursive;
+    font-size: 20px;
+}
+
+#submitButton{
+    background-color: #B9C0DA;
+    border-radius: 50px;
+    font-family: 'Kalam', cursive;
+    font-size: 15px;
+    /* border: 1px solid #707070; grey */
+    box-shadow: 10px 10px 25px 0 #afafaf; /* left, bottom, right, top*/
+    float: right;
+}
+
+#submitButton:hover {
+    /* shadow for pushed effect */
+    box-shadow: 0 0 0 0;
+    border: none;
+  }
+
+
+
+
+/* ---------------------- */
+
+/* ----- TASK HISTORY PAGE ------- */
+
+#historyCard{
+    background-color: white;
+    /* only top two corners are rounded */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    /* card paddings and margins */
+    padding-top: 75px;
+    padding-left: 30%;
+    padding-right: 30%;
+    height: 656px;
+    /* shadow around the card for some depth */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+
