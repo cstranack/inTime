@@ -1,0 +1,54 @@
+
+{{!-- New Task Form --}}
+
+<form action="/addtask" method="POST">
+    <div class="row">
+        <div class="twelve columns">
+            <label for="taskName" id="formLabel">Task Name</label>
+            <input  class="u-full-width"  name="taskName" type="text" placeholder="Email Karen" id="taskName">
+        </div>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="twelve columns">
+            <label for="moreDetailsArea" id="formLabel">More Details</label>
+            <textarea class="u-full-width" name="taskDetails" placeholder="Email Karen about..." id="moreDetailsArea"></textarea>
+        </div>
+    </div>
+    {{!-- <br> --}}
+    <label for="taskOrEvent" id="formLabel">Task or Event?</label>
+    <div class="row">
+        <div class="two columns">
+            <label for="task" id="tOrELabel">task</label>
+        </div>
+        <div class="one column">
+            <input class="u-full-width" name="taskYN" type="radio" id="task" name="taskOrEvent" value="task">
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="two columns">
+            <label for="event" id="tOrELabel">event</label>
+        </div>
+        <div class="one column">
+            <input  class="u-full-width" name="eventYN" type="radio" id="event" name="taskOrEvent" value="event">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="twelve columns">
+            <label for="deadline" id="formLabel">Event date or Task deadline</label>
+            <input class="u-full-width" name="deadline" type="datetime-local" placeholder="  dd/mm/yy  00:00 " id="deadline" name="deadline">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="twelve columns">
+            <label for="duration" id="formLabel">Estimated Duration (hours)</label>
+            <input  class="u-full-width" name="taskLength" type="text" placeholder="4.5" id="duration">
+        </div>
+    </div>
+    {{!-- <br> --}}
+    <input href="overview.html" class="button" type="submit" value="Submit" id="submitButton">
+</form>

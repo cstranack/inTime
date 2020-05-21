@@ -1,0 +1,29 @@
+
+{{#if userExist}}
+    <div class="errorAlert">Oh no, email in use!</div>
+{{else}} {{#if userDoesNotExist}}
+    <div class="successAlert">Woohoo, user created!</div>
+{{/if}} {{/if}}
+
+
+<form action="/createuser" method="POST">
+    <div class="row">
+        <div class="twelve columns">
+            <input type="email" name="username" placeholder="Email" id="emailInput">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="twelve columns">
+            <input type="password" name="password" placeholder="Password" id="passwordInput">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="twelve columns">
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" id="confirmPasswordInput">
+        </div>
+    </div>
+    <br>
+    <input class="button" type="submit" value="submit" id="signUpButton">
+</form>

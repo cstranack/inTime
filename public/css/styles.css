@@ -11,8 +11,11 @@ body {
 h3{
     font-family: 'Kalam', cursive;
     text-align: center;
-    padding-top: 50px;
     color: #777777;
+}
+
+.pageTitle{
+  padding-top: 50px;
 }
 
 
@@ -224,6 +227,10 @@ input[type="checkbox"]:checked ~ label .middle {
 
 /* ---LOGIN/SIGNUP FORM------- */
 
+.loginSignupPage{
+  padding-top: 10%;
+}
+
 #formContainer{
     /* centralising button */
     text-align: center;
@@ -269,14 +276,56 @@ input[type="checkbox"]:checked ~ label .middle {
 
 }
 
+#signUpButton{
+  background-color: #B9C0DA;
+  border-radius: 50px;
+  font-family: 'Kalam', cursive;
+  font-size: 15px;
+  box-shadow: 1px 10px 15px 0 #afafaf; 
+
+}
+
 #loginButton:hover {
     /* shadow for pushed effect */
     box-shadow: 0 0 0 0;
     border: none;
   }
 
+  #signUpButton:hover {
+    /* shadow for pushed effect */
+    box-shadow: 0 0 0 0;
+    border: none;
+  }
 
 
+  .errorAlert{
+    background: rgb(248, 113, 113, 0.5);
+    border-radius: 50px;
+    width: 30%;
+    height: 40px;
+    line-height: 40px;;
+    margin-bottom: 30px;
+    text-align: center;
+    display: inline-block;
+    font-family:'Quicksand', sans-serif;
+    color: #707070;
+    font-size: 15px;
+
+  }
+
+.successAlert{
+  background: rgb(173, 209, 173);
+  border-radius: 50px;
+    width: 30%;
+    height: 40px;
+    line-height: 40px;;
+    margin-bottom: 30px;
+    text-align: center;
+    display: inline-block;
+    font-family:'Quicksand', sans-serif;
+    color: #707070;
+    font-size: 15px;
+}
 
 
   /* ----OVERVIEW PAGE--- */
@@ -316,7 +365,7 @@ input[type="checkbox"]:checked ~ label .middle {
   -webkit-box-sizing: border-box; box-sizing: border-box;
   }
   
-  .bodyCalender {
+  /* .bodyCalender {
    font-family:'Quicksand', sans-serif;
    background: #E4E4E4;
    -webkit-touch-callout: none;
@@ -325,7 +374,7 @@ input[type="checkbox"]:checked ~ label .middle {
    -moz-user-select: none;
    -ms-user-select: none;
    user-select: none;
-  }
+  } */
   
   #calendar {
     -webkit-transform: translate3d(0, 0, 0);
@@ -395,34 +444,35 @@ input[type="checkbox"]:checked ~ label .middle {
   /* Animations fading in and out on load*/
   .month.new {
       -webkit-animation: fadeIn 1s ease-out;
+      animation: fadeIn 1s ease-out;
       opacity: 1;
     }
   
   .month.in.next {
-    -webkit-animation: moveFromTopFadeMonth .4s ease-out;
-    -moz-animation: moveFromTopFadeMonth .4s ease-out;
-    animation: moveFromTopFadeMonth .4s ease-out;
+    -webkit-animation: fadeIn .4s ease-out;
+    -moz-animation: fadeIn .4s ease-out;
+    animation:fadeIn .4s ease-out;
     opacity: 1;
   }
   
   .month.out.next {
-    -webkit-animation: moveToTopFadeMonth .4s ease-in;
-    -moz-animation: moveToTopFadeMonth .4s ease-in;
-    animation: moveToTopFadeMonth .4s ease-in;
+    -webkit-animation: fadeOut .4s ease-in;
+    -moz-animation: fadeOut .4s ease-in;
+    animation: fadeOut .4s ease-in;
     opacity: 1;
   }
   
   .month.in.prev {
-    -webkit-animation: moveFromBottomFadeMonth .4s ease-out;
-    -moz-animation: moveFromBottomFadeMonth .4s ease-out;
-    animation: moveFromBottomFadeMonth .4s ease-out;
+    -webkit-animation: fadeIn .4s ease-out;
+    -moz-animation: fadeIn .4s ease-out;
+    animation: fadeIn .4s ease-out;
     opacity: 1;
   }
   
   .month.out.prev {
-    -webkit-animation: moveToBottomFadeMonth .4s ease-in;
-    -moz-animation: moveToBottomFadeMonth .4s ease-in;
-    animation: moveToBottomFadeMonth .4s ease-in;
+    -webkit-animation: fadeOut .4s ease-in;
+    -moz-animation: fadeOut .4s ease-in;
+    animation: fadeOut .4s ease-in;
     opacity: 1;
   }
   
@@ -449,40 +499,28 @@ input[type="checkbox"]:checked ~ label .middle {
 /* Link, Visited, Hover, Active */
 
   .day:hover {
-    background-color: rgb(169, 210, 213, 0.5);
+    background-color: rgb(169, 210, 213, 0.3);
   }
 
-  .day:active {
+  .day.active {
     background: #a9d2d5;
   }
 
+  .day.today{
+    background: rgb(185, 192, 218, 0.5);
+    color: #ffffff;
+  }
 
+  .day.today.active{
+    background: rgb(185, 192, 218);
+  }
 
   .day.other {
    color: rgba(0, 0, 0, 0.3);
   }
 
-  .day.other:hover {
-    background-color: rgb(169, 210, 213, 0.25);
-  }
-
-  .day.other:active {
-    background-color: rgb(169, 210, 213, 0.5);
-  }
-
-
-  
-  .day.today {
-    color: #A9D2D5;
-  }
-
-  .day.today:hover{
-    color: #ffffff;
-  }
-
-  .day.today:active {
-    background: #a9d2d5;
-    /* color: #ffffff; */
+  .day.other.active{
+    background: rgb(169, 210, 213, 0.5);
   }
   
 
@@ -595,18 +633,17 @@ input[type="checkbox"]:checked ~ label .middle {
 
 
 
-
-
 /* -----NEW TASK PAGE-------- */
 
 #newTaskCard{
     background-color: white;
     /* only top two corners are rounded */
+    height: 700px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     /* card paddings and margins */
-    padding-top: 75px;
-    padding-bottom: 100px;
+    padding-top: 70px;
+    /* padding-bottom: 100px; */
     padding-left: 30%;
     padding-right: 30%;
     /* shadow around the card for some depth */
@@ -616,7 +653,7 @@ input[type="checkbox"]:checked ~ label .middle {
 
 #taskContainer{
     /* text-align: left; */
-    padding-top: 10px;
+    /* padding-top: 10px; */
     margin-top: 10px;
 }
 
