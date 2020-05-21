@@ -297,6 +297,8 @@ input[type="checkbox"]:checked ~ label .middle {
     border: none;
   }
 
+  /* --- ERROR ALERTS ----- */
+
 
   .errorAlert{
     background: rgb(248, 113, 113, 0.5);
@@ -310,7 +312,6 @@ input[type="checkbox"]:checked ~ label .middle {
     font-family:'Quicksand', sans-serif;
     color: #707070;
     font-size: 15px;
-
   }
 
 .successAlert{
@@ -327,6 +328,33 @@ input[type="checkbox"]:checked ~ label .middle {
     font-size: 15px;
 }
 
+.hiddenUsernameErrorAlert{
+  background: rgb(248, 113, 113, 0.5);
+  border-radius: 50px;
+  width: 30%;
+  height: 40px;
+  line-height: 40px;;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family:'Quicksand', sans-serif;
+  color: #707070;
+  font-size: 15px;
+  display: none;
+}
+
+.hiddenPasswordErrorAlert{
+  background: rgb(248, 113, 113, 0.5);
+  border-radius: 50px;
+  width: 30%;
+  height: 40px;
+  line-height: 40px;;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family:'Quicksand', sans-serif;
+  color: #707070;
+  font-size: 15px;
+  display: none;
+}
 
   /* ----OVERVIEW PAGE--- */
 

@@ -7,6 +7,7 @@ var handlebars = require('express-handlebars');
 var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var session = require('express-session');
+const axios = require('axios');
 require('./middleware/passport')(passport);
 
 //mongoDB connection
@@ -74,11 +75,12 @@ app.get('/index', (req, res) =>{
 
 // adding a task
 app.post('/addtask', (req, res) =>{
-    const { taskName, taskDetails, deadline, taskLength } = req.body;
+    const { taskName, taskDetails, taskOrEvent, deadline, taskLength } = req.body;
     var task = new Task({
         // user: req.user.id,
         taskName,
         taskDetails,
+        taskOrEvent,
         deadline,
         taskLength
     });

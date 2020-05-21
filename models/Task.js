@@ -10,12 +10,9 @@ const TaskSchema = new mongoose.Schema({
     taskDetails: {
         type: String
     },
-    // taskYN: {
-    //     type: Boolean
-    // },
-    // eventYN: {
-    //     type: Boolean
-    // },
+    taskOrEvent: {
+        type: String
+    },
     deadline: {
         type: Date
     },
@@ -24,7 +21,7 @@ const TaskSchema = new mongoose.Schema({
     },
     dateAdded: {
         type: Date,
-        defult: Date.now
+        default: Date.now
     }
 });
 

@@ -16,24 +16,13 @@
             <textarea class="u-full-width" name="taskDetails" placeholder="Email Karen about..." id="moreDetailsArea"></textarea>
         </div>
     </div>
-    {{!-- <br> --}}
-    <label for="taskOrEvent" id="formLabel">Task or Event?</label>
+    <br>
     <div class="row">
-        <div class="two columns">
-            <label for="task" id="tOrELabel">task</label>
-        </div>
-        <div class="one column">
-            <input class="u-full-width" name="taskYN" type="radio" id="task" name="taskOrEvent" value="task">
-        </div>
-    </div>
-        
-    <div class="row">
-        <div class="two columns">
-            <label for="event" id="tOrELabel">event</label>
-        </div>
-        <div class="one column">
-            <input  class="u-full-width" name="eventYN" type="radio" id="event" name="taskOrEvent" value="event">
-        </div>
+        <label for="taskOrEvent" id="formLabel">Task or Event?</label>
+        <select name="taskOrEvent" id="taskOrEvent">
+            <option value="task">Task</option>
+            <option value="event">Event</option>
+        </select>
     </div>
     <br>
     <div class="row">

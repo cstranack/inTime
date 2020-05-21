@@ -6,6 +6,7 @@ const usernameField = document.querySelector('#emailInput');
 const signUpSubmit = document.querySelector('#signUpButton');
 const password = document.querySelector('#passwordInput');
 const confirmPassword = document.querySelector('#confirmPasswordInput');
+// var noUsername = false;
 
 
 
@@ -13,11 +14,16 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
   signUpSubmit.addEventListener('click', (e) => {
       if(usernameField.value === ''){
           e.preventDefault();
-          window.alert('Form Requires Username');
+          var noUsernameAlert = document.getElementsByClassName("hiddenUsernameErrorAlert");
+          // toggle class to show 'no username' alert
+            noUsernameAlert[0].style.display = "inline-block";
+            
       }
       if(password.value != confirmPassword.value){
           e.preventDefault();
-          window.alert('Passwords Do Not Match');
+          var noPasswordAlert = document.getElementsByClassName("hiddenPasswordErrorAlert");
+          // toggle class to show 'passwords dont match' alert
+            noPasswordAlert[0].style.display = "inline-block";
       }
   });
 }
@@ -208,6 +214,10 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
       this.current.add('months', 1);
       this.next = true;
       this.draw();
+      setTimeout(function(){
+        dateSelector();
+        console.log("loaded");
+      },500);
     }
   
     //going to the previous month
@@ -215,6 +225,10 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
       this.current.subtract('months', 1);
       this.next = false;
       this.draw();
+      setTimeout(function(){
+        dateSelector();
+        console.log("loaded");
+      },500);
     }
   
   
@@ -239,12 +253,13 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
   }();
 
 
+dateSelector();
 
-
-var dateSelects = document.querySelectorAll(".day");
+function dateSelector(){
+  var dateSelects = document.querySelectorAll(".day:not(.other)");
 
 // Loop through the buttons and add the active class to the current/clicked button
-for (var i = 0; i < dateSelects.length; i++) {
+  for (var i = 0; i < dateSelects.length; i++) {
   dateSelects[i].addEventListener("click", function() {
     var current = document.getElementsByClassName("day active");
   
@@ -256,9 +271,12 @@ for (var i = 0; i < dateSelects.length; i++) {
 
     // Add the active class to the current/clicked button
     this.className += " active";
-    
   });
 }
+
+}
+
+
 
 
 
