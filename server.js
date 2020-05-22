@@ -8,6 +8,8 @@ var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var session = require('express-session');
 const axios = require('axios');
+//requires a specific function 
+var { isAuth } = require('./middleware/isAuth');
 require('./middleware/passport')(passport);
 
 //mongoDB connection
@@ -17,9 +19,9 @@ const mongoURL = process.env.mongoURL || 'mongodb://localhost:27017/inTime';
 var User = require('./models/User');
 var Task = require('./models/Task');
 
+//---ROUTES---
 app.use(express.static('public'));
 
-//---ROUTES---
 app.set('view engine', 'hbs');
 
 app.engine('hbs', handlebars({
@@ -27,10 +29,13 @@ app.engine('hbs', handlebars({
     extname: 'hbs'
 }));
 
+//passport connection
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Database connection
 app.use(bodyParser.json());  
 app.use(bodyParser.urlencoded({ extended: false }));
-
 
 //passport
 app.use(
@@ -38,8 +43,8 @@ app.use(
         secret: 'mySecret',
         resave: true,
         saveUninitialized: true,
-        //addind a logged in timelimit
-        cookie: { maxAge: 60000 }
+        //adding a logged in timelimit
+        cookie: { maxAge: 600000 }
     })
 );
 
@@ -52,24 +57,40 @@ app.use(passport.session());
 //web application requesting login page
 //req = request // res = response // =>'fat arrow' = function
 app.get('/', (req, res) =>{
-    // req.logout();
     res.render('login', {layout: 'public' });
 });
+
+app.get('/logout', (req, res) =>{
+    req.logout();
+    res.render('login', {layout: 'public' });
+});
+
 
 app.get('/signup', (req, res) =>{
     res.render('signup', {layout: 'public' });
 });
 
-app.get('/newtask', (req, res) =>{
-    res.render('newtask', {layout: 'main' });
+app.get('/newtask', isAuth, (req, res) =>{
+    res.render('newtask', {layout: 'main', username: req.user.username });
 });
 
-app.get('/taskhistory', (req, res) =>{
-    res.render('taskhistory', {layout: 'main' });
+app.get('/taskhistory', isAuth, (req, res) =>{
+    res.render('taskhistory', {layout: 'main', username: req.user.username});
 });
 
-app.get('/index', (req, res) =>{
-    res.render('index', {layout: 'main' });
+//user: req.user.id
+
+app.get('/index', isAuth, (req, res) => {
+    // here the code is just finding entries related to the logged in user
+    // they both share the same id 
+    Task.find({}).lean()
+    .exec((err, tasks) =>{
+        if(tasks.length){
+            res.render('index', { layout: 'main', tasks: tasks, tasksExist: true, username: req.user.username });
+        } else{
+            res.render('index', { layout: 'main', tasks: tasks, tasksExist: false, username: req.user.username });
+        }  
+    });
 });
 
 
@@ -90,26 +111,6 @@ app.post('/addtask', (req, res) =>{
     res.redirect('/newtask?taskadded');
 });
 
-// taskYN,
-// eventYN,
-
-
-// isAuth,
-
-app.get('/index',  (req, res) => {
-    // here the code is just finding entries related to the logged in user
-    // they both share the same id 
-    Task.find({ task: req.user.id }).lean()
-    .exec((err, tasks) =>{
-        if(tasks.length){
-            res.render('index', { layout: 'main', tasks: tasks, tasksExist: true, username: req.user.username });
-        } else{
-            res.render('index', { layout: 'main', tasks: tasks, tasksExist: false, username: req.user.username });
-        }  
-    });
-});
-
-
 
 //async function used here (for security)
 //prevents a user making 2 accounts with the same email
@@ -122,7 +123,7 @@ app.post('/createuser', async (req, res) => {
 
         if(user) {
             //if it does, gives feedback and doesnt send to database
-            //400 = bad request - user aleardy exists
+            //400 = bad request - user already exists
             return res.status(400).render('signup', {layout: 'public', userExist: true});
         }
         user = new User({
@@ -140,6 +141,23 @@ app.post('/createuser', async (req, res) => {
         res.status(200).render('signup', {layout: 'public', userDoesNotExist: true});
     } catch(err){
         //if theres an error, stop the code and feedback to client
+        console.log(err.message);
+        res.status(500).send('Server Error')
+    }
+})
+
+
+//finding a user in the user database and matching and entered 
+//username and password to exisiting ones.
+app.post('/login', (req, res, next) => {
+    try{
+        passport.authenticate('local', {
+            //if successful- user taken to dashboard
+            successRedirect: '/index',
+            //if failure query incorrectLogin
+            failureRedirect: '/?incorrectLogin'
+        })(req, res, next)
+    } catch(err){
         console.log(err.message);
         res.status(500).send('Server Error')
     }
@@ -164,3 +182,22 @@ mongoose.connect(mongoURL, {
 app.listen(3000,() => {
     console.log('Server listening on port 3000 :) ');
 });
+
+
+
+
+
+// axios.get('/tasks', {
+//     params: {
+//       ID: "5ec57bdd46bf1348141f582c"
+//     }
+//   })
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   })
+//   .then(function () {
+//     // always executed
+//   });  

@@ -221,6 +221,13 @@ input[type="checkbox"]:checked ~ label .middle {
   z-index: 2;
 }
 
+.userEmail{
+  float: right;
+  padding-right: 10px;
+  padding-top: 10px;
+  font-size: 15px;
+  color: #777777;
+}
 
 
 
@@ -317,15 +324,15 @@ input[type="checkbox"]:checked ~ label .middle {
 .successAlert{
   background: rgb(173, 209, 173);
   border-radius: 50px;
-    width: 30%;
-    height: 40px;
-    line-height: 40px;;
-    margin-bottom: 30px;
-    text-align: center;
-    display: inline-block;
-    font-family:'Quicksand', sans-serif;
-    color: #707070;
-    font-size: 15px;
+  width: 30%;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+  display: inline-block;
+  font-family:'Quicksand', sans-serif;
+  color: #707070;
+  font-size: 15px;
 }
 
 .hiddenUsernameErrorAlert{
@@ -354,6 +361,24 @@ input[type="checkbox"]:checked ~ label .middle {
   color: #707070;
   font-size: 15px;
   display: none;
+}
+
+.successTaskAlert{
+  background: rgb(173, 209, 173);
+  border-radius: 50px;
+  width: 30%;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+  display: inline-block;
+  font-family:'Quicksand', sans-serif;
+  color: #707070;
+  font-size: 15px;
+}
+
+.messageContainer{
+  text-align: center;
 }
 
   /* ----OVERVIEW PAGE--- */

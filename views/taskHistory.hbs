@@ -4,7 +4,7 @@
             <li><a href="/newtask" class="asideAnchor">New Task</a></li>
             <li><a href="/index" class="asideAnchor">Overview</a></li>
             <li><a href="/taskhistory" class="asideAnchor">Task History</a></li>
-            <li><a href="/" class="asideAnchor">Logout</a></li>
+            <li><a href="/logout" class="asideAnchor">Logout</a></li>
           </ul>
         </aside>
         <section>
@@ -17,10 +17,13 @@
           
       
             <div class="content">
-                <h3 class="pageTitle">Task History</h3>
-                <br>
+              <div class="row">
+                <p class="userEmail">hello {{username}}</p> 
+              </div>
+              <h3 class="pageTitle">Task History</h3>
+              <br>
                 <!-- container for the new task form -->
-                <div class="container" id="taskContainer">
+              <div class="container" id="taskContainer">
                     <!-- new task form is displayed on a card -->
                     <div class="card" id="historyCard">
                         <table class="u-full-width">

@@ -5,9 +5,11 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 
+
 //function directly in module exports
-//done - similar to try or catch - the middlewear has to be complete before
+//done - similar to try or catch - the middleware has to be complete before
 //next part is executed so done lets the api know this function is done
+
 module.exports = (passport) =>{
     passport.use(
         new LocalStrategy((username, password, done) =>{

@@ -6,7 +6,7 @@
             <li><a href="/newtask" class="asideAnchor">New Task</a></li>
             <li><a href="/index" class="asideAnchor">Overview</a></li>
             <li><a href="/taskhistory" class="asideAnchor">Task History</a></li>
-            <li><a href="/" class="asideAnchor">Logout</a></li>
+            <li><a href="/logout" class="asideAnchor">Logout</a></li>
           </ul>
         </aside>
         <section>
@@ -19,21 +19,24 @@
           
       
             <div class="content">
+            <div class="row">
+                <p class="userEmail">hello {{username}}</p> 
+            </div>
                 <h3 class="pageTitle">Overview</h3>
                 <div class="row">
                     <div class="five columns">
                         <div class="card" id="toDoCard">
                             <div class="container">
                                 <p class="toDoTitle">ToDo List<p>
-                                {{#if taskExist}}
-                                {{#each tasks}}
-                                <p id="demo"> {{ taskName}} </p>
-                                {{/each}}
+                                {{#if tasksExist }}
+                                    {{#each tasks}}
+                                        <p id="taskListItem"> {{ taskName }} </p>
+                                    {{/each}}
                                 {{else}}
-                                <p>Woohoo! You have no Task or events!!!</p>
+                                    <p>Woohoo! You have no Tasks or events!!!</p>
                                 {{/if}}
                             </div>
-                        </div>
+                        </div>  
                     </div>
                     <div class="seven columns">
                         <div class="card" id="monthCard">

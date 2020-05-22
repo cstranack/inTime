@@ -1,23 +1,25 @@
 
 
-//this code prevents empty fields being submitted to the databse
-
 const usernameField = document.querySelector('#emailInput');
 const signUpSubmit = document.querySelector('#signUpButton');
 const password = document.querySelector('#passwordInput');
 const confirmPassword = document.querySelector('#confirmPasswordInput');
-// var noUsername = false;
+var noUsernameAlert = document.getElementsByClassName("hiddenUsernameErrorAlert");
+var noPasswordAlert = document.getElementsByClassName("hiddenPasswordErrorAlert");
 
 
 
+
+//this code prevents empty fields being submitted to the database
 if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
   signUpSubmit.addEventListener('click', (e) => {
       if(usernameField.value === ''){
           e.preventDefault();
-          var noUsernameAlert = document.getElementsByClassName("hiddenUsernameErrorAlert");
           // toggle class to show 'no username' alert
-            noUsernameAlert[0].style.display = "inline-block";
-            
+            noUsernameAlert[0].style.display = "inline-block";   
+      }
+      else{
+        noUsernameAlert[0].style.display = "none"; 
       }
       if(password.value != confirmPassword.value){
           e.preventDefault();
@@ -25,21 +27,24 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
           // toggle class to show 'passwords dont match' alert
             noPasswordAlert[0].style.display = "inline-block";
       }
+      else{
+        noPasswordAlert[0].style.display = "none"; 
+      }
   });
 }
 
 
-// const messageContainer = document.querySelector('.messageContainer');
-// //whatever is on the end of the url after the ?
-// const queryString = window.location.search;
+const messageContainer = document.querySelector('.messageContainer');
+//whatever is on the end of the url after the ?
+const queryString = window.location.search;
 
-// if(queryString == '?incorrectLogin'){
-//     messageContainer.innerHTML = `<div class="errorAlert">Incorect Login Details</div>`;
-// }
+if(queryString == '?incorrectLogin'){
+    messageContainer.innerHTML = `<div class="errorAlert">Incorrect Login Details</div>`;
+}
 
-// if(queryString == '?taskadded'){
-//     messageContainer.innerHTML = `<div class="successAlert">task added</div>`;
-// }
+if(queryString == '?taskadded'){
+    messageContainer.innerHTML = `<div class="successTaskAlert">added</div>`;
+}
 
 
 
@@ -52,10 +57,22 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
 !function() {
 
     var today = moment();
-  
+
+    var todayDateLong = today._d
+    var dateString = String(todayDateLong);
+
+    console.log("todays Date: " + dateString);
+    
+    var todayDate =dateString.slice(4,16);
+
+    console.log("todays Date: " + todayDate);
+
+
+
     function Calendar(selector) {
       this.el = document.querySelector(selector);
       this.current = moment().date(1);
+      console.log(this.current);
       this.draw();
       var current = document.querySelector('.today');
       if(current) {
@@ -63,6 +80,8 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
       }
     }
   
+    
+
     Calendar.prototype.draw = function() {
       //Create Header
       this.drawHeader();
@@ -100,6 +119,7 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
       var self = this;
       
       if(this.month) {
+        console.log(this.month);
         this.oldMonth = this.month;
         this.oldMonth.className = 'month out ' + (self.next ? 'next' : 'prev');
         this.oldMonth.addEventListener('webkitAnimationEnd', function() {
@@ -176,7 +196,6 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
     }
   
     Calendar.prototype.drawDay = function(day) {
-      var self = this;
       this.getWeek(day);
   
       //Outer Day
@@ -193,7 +212,6 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
       outer.appendChild(name);
       outer.appendChild(number);
       this.week.appendChild(outer);
-      return outer
 
     }
   
