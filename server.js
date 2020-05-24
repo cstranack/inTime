@@ -19,6 +19,8 @@ const mongoURL = process.env.mongoURL || 'mongodb://localhost:27017/inTime';
 var User = require('./models/User');
 var Task = require('./models/Task');
 
+
+
 //---ROUTES---
 app.use(express.static('public'));
 
@@ -94,6 +96,7 @@ app.get('/index', isAuth, (req, res) => {
 });
 
 
+
 // adding a task
 app.post('/addtask', (req, res) =>{
     const { taskName, taskDetails, taskOrEvent, deadline, taskLength } = req.body;
@@ -166,6 +169,12 @@ app.post('/login', (req, res, next) => {
 
 
 
+
+
+
+
+
+
 mongoose.connect(mongoURL, {
     useUnifiedTopology: true,
     useNewUrlParser: true
@@ -185,11 +194,14 @@ app.listen(3000,() => {
 
 
 
+// if( {{deadline }} = "2020-02-20T17:00:00.000+00:00"){
+
+// }
 
 
 // axios.get('/tasks', {
 //     params: {
-//       ID: "5ec57bdd46bf1348141f582c"
+//       deadline: "2020-05-28T16:00:00.000+00:00"
 //     }
 //   })
 //   .then(function (response) {

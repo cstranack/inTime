@@ -31,6 +31,8 @@
                                 {{#if tasksExist }}
                                     {{#each tasks}}
                                         <p id="taskListItem"> {{ taskName }} </p>
+                                        <p id="taskListItem"> {{ deadline }} </p>
+                                         <p id="data"></p>
                                     {{/each}}
                                 {{else}}
                                     <p>Woohoo! You have no Tasks or events!!!</p>

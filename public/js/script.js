@@ -61,18 +61,20 @@ if(queryString == '?taskadded'){
     var todayDateLong = today._d
     var dateString = String(todayDateLong);
 
-    console.log("todays Date: " + dateString);
+    // console.log("todays Date: " + dateString);
     
     var todayDate =dateString.slice(4,16);
 
-    console.log("todays Date: " + todayDate);
+    // console.log("todays Date: " + todayDate);
 
 
 
     function Calendar(selector) {
       this.el = document.querySelector(selector);
       this.current = moment().date(1);
-      console.log(this.current);
+ 
+      // console.log("This current: " + this.current);
+
       this.draw();
       var current = document.querySelector('.today');
       if(current) {
@@ -119,11 +121,12 @@ if(queryString == '?taskadded'){
       var self = this;
       
       if(this.month) {
-        console.log(this.month);
+
+        // console.log(" this month: " + this.month);
+
         this.oldMonth = this.month;
         this.oldMonth.className = 'month out ' + (self.next ? 'next' : 'prev');
         this.oldMonth.addEventListener('webkitAnimationEnd', function() {
-          //If months are clicked too fast - error here
           //removes old month 
           self.oldMonth.parentNode.removeChild(self.oldMonth);
           self.month = createElement('div', 'month');
@@ -169,6 +172,7 @@ if(queryString == '?taskadded'){
     Calendar.prototype.fowardFill = function() {
       var clone = this.current.clone().add('months', 1).subtract('days', 1);
       var dayOfWeek = clone.day();
+      
       //dayOfWeek = how many of the last 6 items in the last row of the month 
       //are part of the current month  
       if(dayOfWeek === 6) { return; }
@@ -180,6 +184,7 @@ if(queryString == '?taskadded'){
   
     Calendar.prototype.currentMonth = function() {
       var clone = this.current.clone();
+      
   
       while(clone.month() === this.current.month()) {
         this.drawDay(clone);
@@ -197,8 +202,14 @@ if(queryString == '?taskadded'){
   
     Calendar.prototype.drawDay = function(day) {
       this.getWeek(day);
+
+    var myDay = day._d;
+    var myDayString = String(myDay);
+    var thisDay = myDayString.slice(4,16);
+    
+    // console.log(thisDay);
   
-      //Outer Day
+      // Outer Day
       var outer = createElement('div', this.getDayClass(day));
      
   
@@ -207,7 +218,6 @@ if(queryString == '?taskadded'){
   
       //Drawing the day Number
       var number = createElement('div', 'day-number', day.format('DD'));
-
   
       outer.appendChild(name);
       outer.appendChild(number);
@@ -224,9 +234,12 @@ if(queryString == '?taskadded'){
       } else if (today.isSame(day, 'day')) {
         classes.push('today');
       }
+      // console.log(classes);
       return classes.join(' ');
     }
   
+
+
     //going to the next month
     Calendar.prototype.nextMonth = function() {
       this.current.add('months', 1);
@@ -270,32 +283,83 @@ if(queryString == '?taskadded'){
   
   }();
 
+  // var output = document.getElementById("data").innerHTML;
+  // Array.prototype.slice.call(dateSelects).forEach(dateSelects, function(dateSelect) {
+  //   output.appendChild(dateSelect);
 
 dateSelector();
 
+var activeDate = "yyyy-mm-dd";
+
 function dateSelector(){
   var dateSelects = document.querySelectorAll(".day:not(.other)");
-
+  var activeDate = "yyyy-mm-dd";
+  
 // Loop through the buttons and add the active class to the current/clicked button
   for (var i = 0; i < dateSelects.length; i++) {
-  dateSelects[i].addEventListener("click", function() {
+
+    dateSelects[i].addEventListener("click", function() {
+
     var current = document.getElementsByClassName("day active");
-  
+    
+    //finds the date number of the active date
+    var selectedDate = this.innerText;
+
+    var thisMonthDates = document.getElementById("calendar").innerText;
+    thisMonthDates = String(thisMonthDates);
+
+    //extracting the current month and date selcted and 
+    //printing them as strings
+    var tempArray = thisMonthDates.split("\n");
+    var thisMonthYear = tempArray[0];
+
+    tempArray = selectedDate.split("\n");
+    thisDay = tempArray[1];
+
+    // console.log(thisMonthYear);
+    // console.log(selectedDate); 
+
+    var tempArray = thisMonthYear.split(" ");
+    thisMonth = tempArray[0];
+    thisYear = tempArray[1];
+    // console.log(thisMonth);
+    // console.log(thisYear);
+
+    // converting the month word into a number 
+
+    var months = [ "January","February","March","April","May","June","July",
+    "August","September","October","November"];
+
+      for(var mName = 0; mName < months.length; mName++){
+
+        if (months[mName] == thisMonth){
+            var mNumber = mName+1;
+            //if the number is less than 10 
+            //the code adds a '0' before the number to give it a date
+            //format e.g. 5 -> 05 
+            if(mNumber < 10){
+              mNumber = "" + 0 + mNumber;
+            }
+        }
+      }
+
+    thisMonth = String(mNumber);
+    
+    //concatinating the date, in the same format as the database
+    //format: yyyy/mm/dd
+    // --CAN'T ACCESS THIS FROM OUTSIDE THE EVENTLISTENER-- ?
+    var activeDate = "" + thisYear + "-" + thisMonth + "-" + thisDay;
+    console.log(activeDate);
+
     // If there's no active class
     if (current.length > 0) {
       current[0].className = current[0].className.replace("day active", "day");
-      
     }
-
     // Add the active class to the current/clicked button
     this.className += " active";
-  });
+
+    });
+  }
+ 
 }
-
-}
-
-
-
-
-
 
