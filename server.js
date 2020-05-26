@@ -200,7 +200,6 @@ app.get('/getdate/:date', async (req, res) => {
 
 
 
-
 mongoose.connect(mongoURL, {
     useUnifiedTopology: true,
     useNewUrlParser: true
