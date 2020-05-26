@@ -7,7 +7,9 @@ var handlebars = require('express-handlebars');
 var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var session = require('express-session');
-const axios = require('axios');
+// const axios = require('axios');
+const MongoClient = require("mongodb").MongoClient;
+
 //requires a specific function 
 var { isAuth } = require('./middleware/isAuth');
 require('./middleware/passport')(passport);
@@ -76,16 +78,25 @@ app.get('/newtask', isAuth, (req, res) =>{
     res.render('newtask', {layout: 'main', username: req.user.username });
 });
 
+var date = "2020-05-28T16:00:00.000+00:00";
+
 app.get('/taskhistory', isAuth, (req, res) =>{
-    res.render('taskhistory', {layout: 'main', username: req.user.username});
+    Task.find({user: req.user.id}).lean()
+    .exec((err, tasks) =>{
+        if(tasks.length){
+            res.render('taskhistory', { layout: 'main', tasks: tasks, tasksExist: true, username: req.user.username });
+        } else{
+            res.render('taskhistory', { layout: 'main', tasks: tasks, tasksExist: false, username: req.user.username });
+        }  
+    });
 });
 
-//user: req.user.id
+// tasks: req.status="Active"
 
 app.get('/index', isAuth, (req, res) => {
     // here the code is just finding entries related to the logged in user
     // they both share the same id 
-    Task.find({}).lean()
+    Task.find({user: req.user.id, }).lean()
     .exec((err, tasks) =>{
         if(tasks.length){
             res.render('index', { layout: 'main', tasks: tasks, tasksExist: true, username: req.user.username });
@@ -101,7 +112,7 @@ app.get('/index', isAuth, (req, res) => {
 app.post('/addtask', (req, res) =>{
     const { taskName, taskDetails, taskOrEvent, deadline, taskLength } = req.body;
     var task = new Task({
-        // user: req.user.id,
+        user: req.user.id,
         taskName,
         taskDetails,
         taskOrEvent,
@@ -164,13 +175,28 @@ app.post('/login', (req, res, next) => {
         console.log(err.message);
         res.status(500).send('Server Error')
     }
-})
+});
+
+
+// This uses URL parameter to pass a date to the server from the client
+app.get('/getdate/:date', async (req, res) => {
+    console.log(req.params.date);
+    //This queries the database and looks for an entry that has our passed in date in it.
+    let task = await Task.find({ deadline: { "$in": req.params.date } });
+    console.log(task);
+    res.json(task);
+});
 
 
 
-
-
-
+// app.post("/completedTask", (req, res) => {
+//     var id = req.params.id;
+//     db.collection("tasks").deleteOne({ _id: new mongoose.ObjectId(id) }, (err, obj) => {
+//         if (err) throw err;
+//         console.log(`Successfully Deleted Post with id of ${id}`);
+//         res.redirect("/index");
+//     });
+//   });
 
 
 
@@ -194,17 +220,34 @@ app.listen(3000,() => {
 
 
 
+
+
+// mongoose.connect(mongoURL, function(err, db){
+//     if (err) throw err;
+//     var dbo = db.db("mydb");
+//     var query = { deadline: "2020-05-28T16:00:00.000+00:00" };
+//         dbo.collection("tasks").find(query).toArray(function(err, result) {
+//         if (err) throw err;
+//         console.log(result);
+//         db.close();
+//       });
+
+// })
+
+
+
 // if( {{deadline }} = "2020-02-20T17:00:00.000+00:00"){
 
 // }
-
+ 
 
 // axios.get('/tasks', {
 //     params: {
-//       deadline: "2020-05-28T16:00:00.000+00:00"
+//       deadline: "2020-05-28"
 //     }
 //   })
 //   .then(function (response) {
+//     document.getElementById("taskListItem2").innerHTML = response;
 //     console.log(response);
 //   })
 //   .catch(function (error) {

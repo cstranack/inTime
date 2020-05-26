@@ -1,5 +1,6 @@
 
 
+
 const usernameField = document.querySelector('#emailInput');
 const signUpSubmit = document.querySelector('#signUpButton');
 const password = document.querySelector('#passwordInput');
@@ -283,83 +284,125 @@ if(queryString == '?taskadded'){
   
   }();
 
-  // var output = document.getElementById("data").innerHTML;
-  // Array.prototype.slice.call(dateSelects).forEach(dateSelects, function(dateSelect) {
-  //   output.appendChild(dateSelect);
 
-dateSelector();
 
-var activeDate = "yyyy-mm-dd";
 
-function dateSelector(){
-  var dateSelects = document.querySelectorAll(".day:not(.other)");
-  var activeDate = "yyyy-mm-dd";
-  
-// Loop through the buttons and add the active class to the current/clicked button
-  for (var i = 0; i < dateSelects.length; i++) {
-
-    dateSelects[i].addEventListener("click", function() {
-
-    var current = document.getElementsByClassName("day active");
+    var activeDate;
+    dateSelector();
     
-    //finds the date number of the active date
-    var selectedDate = this.innerText;
-
-    var thisMonthDates = document.getElementById("calendar").innerText;
-    thisMonthDates = String(thisMonthDates);
-
-    //extracting the current month and date selcted and 
-    //printing them as strings
-    var tempArray = thisMonthDates.split("\n");
-    var thisMonthYear = tempArray[0];
-
-    tempArray = selectedDate.split("\n");
-    thisDay = tempArray[1];
-
-    // console.log(thisMonthYear);
-    // console.log(selectedDate); 
-
-    var tempArray = thisMonthYear.split(" ");
-    thisMonth = tempArray[0];
-    thisYear = tempArray[1];
-    // console.log(thisMonth);
-    // console.log(thisYear);
-
-    // converting the month word into a number 
-
-    var months = [ "January","February","March","April","May","June","July",
-    "August","September","October","November"];
-
-      for(var mName = 0; mName < months.length; mName++){
-
-        if (months[mName] == thisMonth){
-            var mNumber = mName+1;
-            //if the number is less than 10 
-            //the code adds a '0' before the number to give it a date
-            //format e.g. 5 -> 05 
-            if(mNumber < 10){
-              mNumber = "" + 0 + mNumber;
+    function dateSelector() {
+      var dateSelects = document.querySelectorAll(".day:not(.other)");
+      //activeDate = "yyyy-mm-dd";
+    
+      // Loop through the buttons and add the active class to the current/clicked button
+      for (var i = 0; i < dateSelects.length; i++) {
+    
+        dateSelects[i].addEventListener("click", function () {
+    
+          var current = document.getElementsByClassName("day active");
+    
+          //finds the date number of the active date
+          var selectedDate = this.innerText;
+    
+          var thisMonthDates = document.getElementById("calendar").innerText;
+          thisMonthDates = String(thisMonthDates);
+    
+          //extracting the current month and date selcted and 
+          //printing them as strings
+          var tempArray = thisMonthDates.split("\n");
+          var thisMonthYear = tempArray[0];
+    
+          tempArray = selectedDate.split("\n");
+          thisDay = tempArray[1];
+    
+    
+          var tempArray = thisMonthYear.split(" ");
+          thisMonth = tempArray[0];
+          thisYear = tempArray[1];
+        
+    
+          // converting the month word into a number 
+          var months = ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November"];
+    
+          for (var mName = 0; mName < months.length; mName++) {
+    
+            if (months[mName] == thisMonth) {
+              var mNumber = mName + 1;
+              //if the number is less than 10 
+              //the code adds a '0' before the number to give it a date
+              //format e.g. 5 -> 05 
+              if (mNumber < 10) {
+                mNumber = "" + 0 + mNumber;
+              }
             }
-        }
-      }
-
-    thisMonth = String(mNumber);
+          }
     
-    //concatinating the date, in the same format as the database
-    //format: yyyy/mm/dd
-    // --CAN'T ACCESS THIS FROM OUTSIDE THE EVENTLISTENER-- ?
-    var activeDate = "" + thisYear + "-" + thisMonth + "-" + thisDay;
-    console.log(activeDate);
-
-    // If there's no active class
-    if (current.length > 0) {
-      current[0].className = current[0].className.replace("day active", "day");
+          thisMonth = String(mNumber);
+    
+          //concatinating the date, in the same format as the database
+          //format: yyyy/mm/dd
+          activeDate = "" + thisYear + "-" + thisMonth + "-" + thisDay;
+    
+          // If there's no active class
+          if (current.length > 0) {
+            current[0].className = current[0].className.replace("day active", "day");
+          }
+          // Add the active class to the current/clicked button
+          this.className += " active";
+    
+          console.log(activeDate);
+    
+          axios.get(`/getdate/${activeDate}`)
+            .then((response) => {
+              console.log(response.data);
+            }, (error) => {
+              console.log(error);
+            });
+    
+        });
+      }
+  
     }
-    // Add the active class to the current/clicked button
-    this.className += " active";
+    
+    
 
-    });
-  }
- 
-}
+
+
+
+
+
+// function hideTask(){
+//   var taskListItems = document.getElementById("taskListItems");
+//     taskListItems.style.display = "none";
+// }
+
+
+// // Get the modal
+// var modal = document.getElementById("myModal");
+
+// // Get the button that opens the modal
+// var btn = document.getElementById("expandButton");
+
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+
+// // When the user clicks on the button, open the modal
+// btn.onclick = function() {
+//   modal.style.display = "block";
+// }
+
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//   modal.style.display = "none";
+// }
+
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// }
+
+
 

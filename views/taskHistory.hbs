@@ -26,55 +26,24 @@
               <div class="container" id="taskContainer">
                     <!-- new task form is displayed on a card -->
                     <div class="card" id="historyCard">
-                        <table class="u-full-width">
+                        <table class="table">
                             <thead>
                               <tr>
                                 <th>Task name</th>
                                 <th>Status</th>
-                                <th>Date edited</th>
+                                <th>Date Created</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Call jenny</td>
-                                <td>Complete</td>
-                                <td>05.05.20</td>
-                              </tr>
-                              <tr>
-                                <td>Send report</td>
-                                <td>Complete</td>
-                                <td>05.07.20</td>
-                              </tr>
-                              <tr>
-                                <td>Check emails</td>
-                                <td>Complete</td>
-                                <td>05.10.20</td>
-                              </tr>
-                              <tr>
-                                <td>Call jenny</td>
-                                <td>To do</td>
-                                <td>05.05.20</td>
-                              </tr>
-                              <tr>
-                                <td>Send report</td>
-                                <td>To do</td>
-                                <td>05.07.20</td>
-                              </tr>
-                              <tr>
-                                <td>Marketing Meeting</td>
-                                <td>Complete</td>
-                                <td>05.30.20</td>
-                              </tr>
-                              <tr>
-                                <td>Check emails</td>
-                                <td>To do</td>
-                                <td>05.10.20</td>
-                              </tr>
-                              <tr>
-                                <td>Marketing Meeting</td>
-                                <td>To do</td>
-                                <td>05.30.20</td>
-                              </tr>
+                              {{#if tasksExist }}
+                                {{#each tasks}}
+                                  <tr>
+                                    <td>{{ taskName }}</td>
+                                    <td>{{ status }}</td>
+                                    <td>{{ dateAdded }}</td>
+                                  </tr>
+                                {{/each}}
+                                {{/if}}
                             </tbody>
                           </table>
                     </div>

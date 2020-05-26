@@ -27,12 +27,31 @@
                     <div class="five columns">
                         <div class="card" id="toDoCard">
                             <div class="container">
-                                <p class="toDoTitle">ToDo List<p>
+                                <p class="toDoTitle">ToDo List</p>
+                                    <br>
                                 {{#if tasksExist }}
                                     {{#each tasks}}
-                                        <p id="taskListItem"> {{ taskName }} </p>
-                                        <p id="taskListItem"> {{ deadline }} </p>
-                                         <p id="data"></p>
+                                        <div class="row" id="taskListItems">
+                                            <div class="ten columns">
+                                                <p id="taskListItem"><b>{{ taskName }}</b></p>
+                                            </div>
+                                            <div class="one column">
+                                                {{!-- <input id="completeButton" class="button" value="" type="submit" onclick="hideTask()"> --}}
+                                            </div>
+                                            <div class="one column">
+                                                {{!-- <button id="expandButton" class="button"></button> --}}
+                                            </div>
+                                        </div>
+                                        <div id="myModal" class="modal">
+                                        <!-- Modal content -->
+                                            <div class="modal-content">
+                                                <span class="close">&times;</span>
+                                                <h4><b>{{taskName}}</b></h4></p>
+                                                <p><b>Details: </b>{{taskDetails}}</p>
+                                                <p><b>Task Or Event: </b>{{taskOrEvent}}</p>
+                                                <p><b>Estimated Length: </b>{{taskLength}} hours</p>
+                                            </div>
+                                        </div>
                                     {{/each}}
                                 {{else}}
                                     <p>Woohoo! You have no Tasks or events!!!</p>

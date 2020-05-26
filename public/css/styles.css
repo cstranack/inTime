@@ -2,6 +2,7 @@
 
 /* BODY */
 body {
+    height: 100%;
     background-color: #E4E4E4; 
 }
 
@@ -387,8 +388,8 @@ input[type="checkbox"]:checked ~ label .middle {
   #toDoCard{
     /* Todo list card for curret tasks */
     background-color: white;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 20px;
+  
     margin-left: 60px;
     padding-top: 20px;
     /* padding-bottom: 300px; */
@@ -397,11 +398,58 @@ input[type="checkbox"]:checked ~ label .middle {
 
   }
 
+
+  #completeButton{
+    padding-left: 10px;
+    padding-right: 10px;
+    min-width: unset;
+    overflow: hidden;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #B9C0DA;
+    box-shadow: 5px 5px 15px 0 #afafaf; /* xAxis, yAxiz, blur, size*/
+  }
+
+  #expandButton{
+    padding-left: 10px;
+    padding-right: 10px;
+    min-width: unset;
+    overflow: hidden;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #A9D2D5;
+    box-shadow: 5px 5px 15px 0 #afafaf; /* xAxis, yAxiz, blur, size*/
+  }
+
+
+  #completeButton:hover{
+    background-color: #B9C0DA;
+    color: white;
+    box-shadow: 0 0 0 0;
+  }
+
+  #expandButton:hover{
+    background-color: #A9D2D5;
+    color: white;
+    box-shadow: 0 0 0 0;
+  }
+
+  #taskListItem{
+  font-family:'Quicksand', sans-serif;
+  font-size: 15px;
+
+  }
+
   #monthCard{
     /* monthly view*/
     background-color: white;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 20px;
     margin-right: 60px;
     /* padding-top: 20px; */
     height: 700px;
@@ -409,6 +457,51 @@ input[type="checkbox"]:checked ~ label .middle {
     /* position: absolute; */
 }
 
+.moreDetails{
+  display: none;
+}
+
+.taskListItems{
+  display: none;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 /* CALENDER */
 
@@ -692,8 +785,7 @@ input[type="checkbox"]:checked ~ label .middle {
     background-color: white;
     /* only top two corners are rounded */
     height: 700px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 20px;
     /* card paddings and margins */
     padding-top: 70px;
     /* padding-bottom: 100px; */
@@ -778,16 +870,31 @@ input[type="checkbox"]:checked ~ label .middle {
 
 #historyCard{
     background-color: white;
-    /* only top two corners are rounded */
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 20px;
     /* card paddings and margins */
     padding-top: 75px;
-    padding-left: 30%;
-    padding-right: 30%;
-    height: 656px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 75px;
+    height: 100%;
     /* shadow around the card for some depth */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 
+.table{
+  width:100%;
+}
+
+
+
+/* ----FOOTER------ */
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 57px;
+  background-color: #97A0A5;
+}

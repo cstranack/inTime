@@ -4,6 +4,10 @@ var mongoose = require('mongoose');
 //to be used in our front end files, so that we can save that data to our database.
 
 const TaskSchema = new mongoose.Schema({
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    },
     taskName: {
         type: String
     },
@@ -18,6 +22,10 @@ const TaskSchema = new mongoose.Schema({
     },
     taskLength:{
         type: Number
+    },
+    status:{
+        type: String,
+        default: "Active"
     },
     dateAdded: {
         type: Date,
