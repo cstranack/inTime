@@ -78,7 +78,7 @@ app.get('/signup', (req, res) =>{
 });
 
 app.get('/newtask', isAuth, (req, res) =>{
-    res.render('newtask', {layout: 'main', username: req.user.username });
+    res.render('newTask', {layout: 'main', username: req.user.username });
 });
 
 
@@ -86,9 +86,9 @@ app.get('/taskhistory', isAuth, (req, res) =>{
     Task.find({user: req.user.id}).lean()
     .exec((err, tasks) =>{
         if(tasks.length){
-            res.render('taskhistory', { layout: 'main', tasks: tasks, tasksExist: true, username: req.user.username });
+            res.render('taskHistory', { layout: 'main', tasks: tasks, tasksExist: true, username: req.user.username });
         } else{
-            res.render('taskhistory', { layout: 'main', tasks: tasks, tasksExist: false, username: req.user.username });
+            res.render('taskHistory', { layout: 'main', tasks: tasks, tasksExist: false, username: req.user.username });
         }  
     });
 });
@@ -165,7 +165,7 @@ app.post('/createuser', async (req, res) => {
     
         await user.save();
         // prevent hanging, redirect back to home page
-        res.status(200).render('signup', {layout: 'public', userDoesNotExist: true});
+        res.status(200).render('signUp', {layout: 'public', userDoesNotExist: true});
     } catch(err){
         //if theres an error, stop the code and feedback to client
         console.log(err.message);
