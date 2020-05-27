@@ -8,11 +8,14 @@ var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var session = require('express-session');
 // const axios = require('axios');
-const MongoClient = require("mongodb").MongoClient;
+// const MongoClient = require("mongodb").MongoClient;
 
 //requires a specific function 
 var { isAuth } = require('./middleware/isAuth');
 require('./middleware/passport')(passport);
+
+//port number
+const port = process.env.PORT || 3000;
 
 //mongoDB connection
 const mongoURL = process.env.mongoURL || 'mongodb://localhost:27017/inTime';
@@ -78,7 +81,6 @@ app.get('/newtask', isAuth, (req, res) =>{
     res.render('newtask', {layout: 'main', username: req.user.username });
 });
 
-var date = "2020-05-28T16:00:00.000+00:00";
 
 app.get('/taskhistory', isAuth, (req, res) =>{
     Task.find({user: req.user.id}).lean()
@@ -201,15 +203,6 @@ app.get('/getdate/:date', async (req, res) => {
 
 
 
-// app.post("/completedTask", (req, res) => {
-//     var id = req.params.id;
-//     db.collection("tasks").deleteOne({ _id: new mongoose.ObjectId(id) }, (err, obj) => {
-//         if (err) throw err;
-//         console.log(`Successfully Deleted Post with id of ${id}`);
-//         res.redirect("/index");
-//     });
-//   });
-
 
 
 mongoose.connect(mongoURL, {
@@ -225,45 +218,8 @@ mongoose.connect(mongoURL, {
 
 
 //listening for requests on port 3000
-app.listen(3000,() => {
-    console.log('Server listening on port 3000 :) ');
+app.listen(port,() => {
+    console.log(`Server listening on por:  ${port} :) `);
 });
 
 
-
-
-
-// mongoose.connect(mongoURL, function(err, db){
-//     if (err) throw err;
-//     var dbo = db.db("mydb");
-//     var query = { deadline: "2020-05-28T16:00:00.000+00:00" };
-//         dbo.collection("tasks").find(query).toArray(function(err, result) {
-//         if (err) throw err;
-//         console.log(result);
-//         db.close();
-//       });
-
-// })
-
-
-
-// if( {{deadline }} = "2020-02-20T17:00:00.000+00:00"){
-
-// }
- 
-
-// axios.get('/tasks', {
-//     params: {
-//       deadline: "2020-05-28"
-//     }
-//   })
-//   .then(function (response) {
-//     document.getElementById("taskListItem2").innerHTML = response;
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   })
-//   .then(function () {
-//     // always executed
-//   });  
