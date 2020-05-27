@@ -74,7 +74,7 @@ app.get('/logout', (req, res) =>{
 
 
 app.get('/signup', (req, res) =>{
-    res.render('signup', {layout: 'public' });
+    res.render('signUp', {layout: 'public' });
 });
 
 app.get('/newtask', isAuth, (req, res) =>{
@@ -151,7 +151,7 @@ app.post('/createuser', async (req, res) => {
         if(user) {
             //if it does, gives feedback and doesnt send to database
             //400 = bad request - user already exists
-            return res.status(400).render('signup', {layout: 'public', userExist: true});
+            return res.status(400).render('signUp', {layout: 'public', userExist: true});
         }
         user = new User({
             username,
@@ -201,9 +201,9 @@ app.get('/getdate/:date', async (req, res) => {
     res.json(task);
 });
 
+//"mongodb+srv://admin:flamingo@cluster0-ylc3g.mongodb.net/inTime?retryWrites=true&w=majority"
 
-
-
+// mongoURL
 
 mongoose.connect(mongoURL, {
     useUnifiedTopology: true,
@@ -219,7 +219,7 @@ mongoose.connect(mongoURL, {
 
 //listening for requests on port 3000
 app.listen(port,() => {
-    console.log(`Server listening on por:  ${port} :) `);
+    console.log(`Server listening on port:  ${port} :) `);
 });
 
 
