@@ -1,71 +1,66 @@
 
-{{!-- <body class="bodyNav bodyCalender" > --}}
-    <main>
-        <aside>
-          <ul class="asideList">
-            <li><a href="/newtask" class="asideAnchor">New Task</a></li>
-            <li><a href="/index" class="asideAnchor">Overview</a></li>
-            <li><a href="/taskhistory" class="asideAnchor">Task History</a></li>
-            <li><a href="/logout" class="asideAnchor">Logout</a></li>
-          </ul>
-        </aside>
-        <section>
-          <input type="checkbox" id="myInput">
-          <label  id="menuLabels" for="myInput">
+
+<main>
+    <aside>
+        <ul class="asideList">
+        <li><a href="/newtask" class="asideAnchor">New Task</a></li>
+        <li><a href="/index" class="asideAnchor">Overview</a></li>
+        <li><a href="/taskhistory" class="asideAnchor">Task History</a></li>
+        <li><a href="/taskDetails" class="asideAnchor">Task Details</a></li>
+        <li><a href="/logout" class="asideAnchor">Logout</a></li>
+        </ul>
+    </aside>
+    <section>
+        <input type="checkbox" id="myInput">
+        <label  id="menuLabels" for="myInput">
             <span class="bar top"></span>
             <span class="bar middle"></span>
             <span class="bar bottom"></span>
-          </label>
-          
-      
-            <div class="content">
+        </label>
+        
+    
+        <div class="content">
             <div class="row">
                 <p class="userEmail">hello {{username}}</p> 
             </div>
-                <h3 class="pageTitle">Overview</h3>
-                <div class="row">
-                    <div class="five columns">
-                        <div class="card" id="toDoCard">
-                            <div class="container">
-                                <p class="toDoTitle">ToDo List</p>
-                                    <br>
-                                {{#if tasksExist }}
-                                    {{#each tasks}}
-                                        <div class="row" id="taskListItems">
-                                            <div class="ten columns">
-                                                <p id="taskListItem"><b>{{ taskName }}</b></p>
-                                            </div>
-                                            <div class="one column">
-                                                {{!-- <input id="completeButton" class="button" value="" type="submit" onclick="hideTask()"> --}}
-                                            </div>
-                                            <div class="one column">
-                                                {{!-- <button id="expandButton" class="button"></button> --}}
-                                            </div>
-                                        </div>
-                                        <div id="myModal" class="modal">
-                                        <!-- Modal content -->
-                                            <div class="modal-content">
-                                                <span class="close">&times;</span>
-                                                <h4><b>{{taskName}}</b></h4></p>
-                                                <p><b>Details: </b>{{taskDetails}}</p>
-                                                <p><b>Task Or Event: </b>{{taskOrEvent}}</p>
-                                                <p><b>Estimated Length: </b>{{taskLength}} hours</p>
-                                            </div>
-                                        </div>
-                                    {{/each}}
-                                {{else}}
-                                    <p>Woohoo! You have no Tasks or events!!!</p>
-                                {{/if}}
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="seven columns">
-                        <div class="card" id="monthCard">
-                            <div id="calendar"></div>
+            <h3 class="pageTitle">Overview</h3>
+            <div class="row">
+                <div class="five columns">
+                    <div class="card" id="toDoCard">
+                        <div class="container" id="toDoContainer">
+                            <p class="toDoTitle">ToDo List </p>
+                            <p id="toDo"></p>
+                            <br>
+                            <div id="taskListItem"></div>
                         </div>
-                    </div> 
+                    </div>     
+                    <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                        <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div id="taskName"></div>
+                        <div id="taskDetails"></div>
+                        <div id="taskOrEvent"></div>
+                        <div id="taskLength"></div>
+                        <div id="taskDeadline"></div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="seven columns">
+                    <div class="card" id="monthCard">
+                        <div id="calendar"></div>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
-{{!-- </body> --}}
+            </div> 
+        </div>
+    </section>
+</main>
+
+
+
+
+
+ 
+
+
+

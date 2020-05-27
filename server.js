@@ -91,12 +91,23 @@ app.get('/taskhistory', isAuth, (req, res) =>{
     });
 });
 
+app.get('/taskDetails', isAuth, (req, res) =>{
+    Task.find({user: req.user.id}).lean()
+    .exec((err, tasks) =>{
+        if(tasks.length){
+            res.render('taskDetails', { layout: 'main', tasks: tasks, tasksExist: true, username: req.user.username });
+        } else{
+            res.render('taskDetails', { layout: 'main', tasks: tasks, tasksExist: false, username: req.user.username });
+        }  
+    });
+});
+
 // tasks: req.status="Active"
 
 app.get('/index', isAuth, (req, res) => {
     // here the code is just finding entries related to the logged in user
     // they both share the same id 
-    Task.find({user: req.user.id, }).lean()
+    Task.find({user: req.user.id}).lean()
     .exec((err, tasks) =>{
         if(tasks.length){
             res.render('index', { layout: 'main', tasks: tasks, tasksExist: true, username: req.user.username });
@@ -182,7 +193,8 @@ app.post('/login', (req, res, next) => {
 app.get('/getdate/:date', async (req, res) => {
     console.log(req.params.date);
     //This queries the database and looks for an entry that has our passed in date in it.
-    let task = await Task.find({ deadline: { "$in": req.params.date } });
+    // also makes your all tasks are user specific by requesting tasks with related user ids 
+    let task = await Task.find({ deadline: { "$in": req.params.date }, user: req.user.id});
     console.log(task);
     res.json(task);
 });

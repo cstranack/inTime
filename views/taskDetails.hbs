@@ -21,7 +21,7 @@
               <div class="row">
                 <p class="userEmail">hello {{username}}</p> 
               </div>
-              <h3 class="pageTitle">Task History</h3>
+              <h3 class="pageTitle">Active Task's Details</h3>
               <br>
                 <!-- container for the new task form -->
               <div class="container" id="taskContainer">
@@ -31,8 +31,10 @@
                             <thead>
                               <tr>
                                 <th>Task name</th>
-                                <th>Status</th>
-                                <th>Date Created</th>
+                                <th>Task Details</th>
+                                <th>Task Length</th>
+                                <th>Task Or Event</th>
+                                <th>Deadline</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -40,8 +42,10 @@
                                 {{#each tasks}}
                                   <tr>
                                     <td>{{ taskName }}</td>
-                                    <td>{{ status }}</td>
-                                    <td>{{ dateAdded }}</td>
+                                    <td>{{ taskDetails }}</td>
+                                    <td>{{ taskLength }}</td>
+                                    <td>{{ taskOrEvent }}</td>
+                                    <td>{{ deadline }}</td>
                                   </tr>
                                 {{/each}}
                                 {{/if}}

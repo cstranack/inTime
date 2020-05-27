@@ -395,8 +395,11 @@ input[type="checkbox"]:checked ~ label .middle {
     /* padding-bottom: 300px; */
     height: 700px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    overflow-y: auto;
 
   }
+
+ 
 
 
   #completeButton{
@@ -443,6 +446,8 @@ input[type="checkbox"]:checked ~ label .middle {
   #taskListItem{
   font-family:'Quicksand', sans-serif;
   font-size: 15px;
+  margin-bottom: 50px;
+  font-weight: bold ;
 
   }
 
@@ -806,7 +811,9 @@ input[type="checkbox"]:checked ~ label .middle {
     /* rounding corners and font */
     border-radius: 40px;
     font-family:'Quicksand', sans-serif;
+    
 }
+                            
 
 
 #moreDetailsArea{
@@ -876,9 +883,10 @@ input[type="checkbox"]:checked ~ label .middle {
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: 75px;
-    height: 100%;
+    height: 700px;
     /* shadow around the card for some depth */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    overflow-x: auto;
 }
 
 

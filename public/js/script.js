@@ -5,8 +5,12 @@ const usernameField = document.querySelector('#emailInput');
 const signUpSubmit = document.querySelector('#signUpButton');
 const password = document.querySelector('#passwordInput');
 const confirmPassword = document.querySelector('#confirmPasswordInput');
+const taskName = document.querySelector('#taskName');
+const deadline = document.querySelector('#deadline');
+const submitButton = document.querySelector('#submitButton');
 var noUsernameAlert = document.getElementsByClassName("hiddenUsernameErrorAlert");
 var noPasswordAlert = document.getElementsByClassName("hiddenPasswordErrorAlert");
+
 
 
 
@@ -22,6 +26,7 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
       else{
         noUsernameAlert[0].style.display = "none"; 
       }
+
       if(password.value != confirmPassword.value){
           e.preventDefault();
           var noPasswordAlert = document.getElementsByClassName("hiddenPasswordErrorAlert");
@@ -33,6 +38,25 @@ if(typeof (signUpSubmit) != 'underfined' && signUpSubmit != null){
       }
   });
 }
+
+//preventing a task with no task name being submitted
+if(typeof (submitButton) != 'underfined' && submitButton != null){
+  submitButton.addEventListener('click', (e) => {
+    if(deadline.value === ''){
+      e.preventDefault();
+      // toggle class to show 'no username' alert
+      messageContainer.innerHTML = `<div class="errorAlert">No deadline</div>`; 
+    }
+    if(taskName.value === ''){
+      e.preventDefault();
+      // toggle class to show 'no username' alert
+      messageContainer.innerHTML = `<div class="errorAlert">No Task Name</div>`; 
+    }
+  });
+}
+
+
+
 
 
 const messageContainer = document.querySelector('.messageContainer');
@@ -291,6 +315,7 @@ if(queryString == '?taskadded'){
     dateSelector();
     
     function dateSelector() {
+      document.getElementById("toDo").innerHTML = "Date Selected: ";
       var dateSelects = document.querySelectorAll(".day:not(.other)");
       //activeDate = "yyyy-mm-dd";
     
@@ -298,6 +323,9 @@ if(queryString == '?taskadded'){
       for (var i = 0; i < dateSelects.length; i++) {
     
         dateSelects[i].addEventListener("click", function () {
+          document.getElementById("taskListItem").innerHTML = "";
+          
+
     
           var current = document.getElementsByClassName("day active");
     
@@ -343,7 +371,8 @@ if(queryString == '?taskadded'){
           //concatinating the date, in the same format as the database
           //format: yyyy/mm/dd
           activeDate = "" + thisYear + "-" + thisMonth + "-" + thisDay;
-    
+
+          document.getElementById("toDo").innerHTML = "Date Selected: " + activeDate;
           // If there's no active class
           if (current.length > 0) {
             current[0].className = current[0].className.replace("day active", "day");
@@ -351,11 +380,30 @@ if(queryString == '?taskadded'){
           // Add the active class to the current/clicked button
           this.className += " active";
     
+          // activeDate = "2020-05-28T16:00:00.000+00:00";
+          var taskArray = [];
+
           console.log(activeDate);
-    
           axios.get(`/getdate/${activeDate}`)
             .then((response) => {
               console.log(response.data);
+              
+              // console.log("This dates deadlines: " + taskArray);
+              //displaying all the tasks
+              for(var thisDayTasks = 0; thisDayTasks < response.data.length; thisDayTasks ++) {
+                
+                taskArray = (response.data[thisDayTasks]);
+                console.log(taskArray);
+                document.getElementById("taskListItem").innerHTML += taskArray.taskName + "<br />" + "<br />";
+
+                document.getElementById("taskName").innerHTML = "Task Name: " + taskArray.taskName;
+                document.getElementById("taskDetails").innerHTML = "Task Details: " + taskArray.taskDetails;
+                document.getElementById("taskOrEvent").innerHTML = "Task Or Event: " + taskArray.taskOrEvent;
+                document.getElementById("taskLength").innerHTML = "Task Length: " + taskArray.taskLength;
+                document.getElementById("taskLength").innerHTML = "Task Length: " + activeDate;
+                                
+                
+              }
             }, (error) => {
               console.log(error);
             });
@@ -366,43 +414,37 @@ if(queryString == '?taskadded'){
     }
     
     
-
-
-
-
-
-
 // function hideTask(){
 //   var taskListItems = document.getElementById("taskListItems");
 //     taskListItems.style.display = "none";
 // }
 
 
-// // Get the modal
-// var modal = document.getElementById("myModal");
+// Get the modal
+var modal = document.getElementById("myModal");
 
-// // Get the button that opens the modal
-// var btn = document.getElementById("expandButton");
+// Get the button that opens the modal
+var btn = document.getElementById("expandButton");
 
-// // Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
-// // When the user clicks on the button, open the modal
-// btn.onclick = function() {
-//   modal.style.display = "block";
-// }
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
 
-// // When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
 
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 
 
 
